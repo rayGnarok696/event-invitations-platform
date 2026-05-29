@@ -14,29 +14,35 @@ export const PREDEFINED_TEMPLATES: Template[] = [
     name: 'Greeting Section',
     description: 'Welcome greeting for the invitation',
     category: 'header',
-    icon: '👋',
+    icon: '🎉',
     htmlTemplate: `
       <div class="greeting">
         <h1>{{title}}</h1>
-        <p>{{content}}</p>
+        <p class="subtitle">{{content}}</p>
       </div>
     `,
     cssPreset: `
       .greeting {
         text-align: center;
-        padding: 40px 20px;
+        padding: 50px 20px;
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         color: white;
-        border-radius: 8px;
-        margin-bottom: 20px;
+        border-radius: 12px;
+        margin-bottom: 30px;
+        box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
       }
       .greeting h1 {
-        font-size: 2.5em;
-        margin: 0 0 10px 0;
+        font-family: 'Georgia', serif;
+        font-size: 3em;
+        margin: 0 0 15px 0;
+        font-weight: bold;
+        letter-spacing: 2px;
       }
-      .greeting p {
-        font-size: 1.1em;
+      .greeting .subtitle {
+        font-size: 1.2em;
         margin: 0;
+        font-style: italic;
+        opacity: 0.95;
       }
     `,
   },
@@ -48,35 +54,58 @@ export const PREDEFINED_TEMPLATES: Template[] = [
     icon: '🕐',
     htmlTemplate: `
       <div class="date-time">
-        <div class="detail">
-          <span class="label">📅 Date:</span>
-          <span class="value">{{date}}</span>
-        </div>
-        <div class="detail">
-          <span class="label">🕐 Time:</span>
-          <span class="value">{{time}}</span>
+        <div class="datetime-container">
+          <div class="detail-item">
+            <span class="icon">📅</span>
+            <div>
+              <span class="label">Date</span>
+              <span class="value">{{date}}</span>
+            </div>
+          </div>
+          <div class="detail-item">
+            <span class="icon">🕐</span>
+            <div>
+              <span class="label">Time</span>
+              <span class="value">{{time}}</span>
+            </div>
+          </div>
         </div>
       </div>
     `,
     cssPreset: `
       .date-time {
-        background: #f8f9fa;
-        padding: 20px;
-        border-radius: 8px;
-        margin: 20px 0;
+        margin: 30px 0;
       }
-      .detail {
+      .datetime-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+      }
+      .detail-item {
         display: flex;
-        justify-content: space-between;
-        margin: 10px 0;
-        font-size: 1.1em;
+        align-items: center;
+        gap: 15px;
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
       }
-      .label {
+      .detail-item .icon {
+        font-size: 2em;
+      }
+      .detail-item .label {
+        display: block;
         font-weight: bold;
         color: #333;
+        font-size: 0.9em;
+        text-transform: uppercase;
+        letter-spacing: 1px;
       }
-      .value {
+      .detail-item .value {
+        display: block;
         color: #666;
+        font-size: 1.1em;
+        margin-top: 5px;
       }
     `,
   },
@@ -87,30 +116,41 @@ export const PREDEFINED_TEMPLATES: Template[] = [
     category: 'details',
     icon: '📍',
     htmlTemplate: `
-      <div class="location">
-        <h3>📍 Location</h3>
-        <p>{{address}}</p>
-        <p class="details">{{additional_info}}</p>
+      <div class="location-section">
+        <div class="location-content">
+          <h3>📍 Location</h3>
+          <p class="address">{{address}}</p>
+          <p class="details">{{additional_info}}</p>
+        </div>
       </div>
     `,
     cssPreset: `
-      .location {
-        background: #ecf0f1;
-        padding: 20px;
-        border-radius: 8px;
-        margin: 20px 0;
+      .location-section {
+        margin: 30px 0;
       }
-      .location h3 {
-        margin: 0 0 10px 0;
-        color: #333;
+      .location-content {
+        background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+        padding: 25px;
+        border-radius: 10px;
+        border-left: 5px solid #ff9800;
+        box-shadow: 0 4px 15px rgba(255, 152, 0, 0.15);
       }
-      .location p {
-        margin: 5px 0;
+      .location-content h3 {
+        margin: 0 0 15px 0;
+        color: #d84315;
+        font-size: 1.3em;
+        font-weight: bold;
+      }
+      .location-content .address {
+        margin: 8px 0;
         color: #555;
+        font-weight: 500;
+        font-size: 1.05em;
       }
-      .location .details {
-        font-size: 0.9em;
-        color: #888;
+      .location-content .details {
+        font-size: 0.95em;
+        color: #777;
+        margin: 5px 0 0 0;
       }
     `,
   },
@@ -122,25 +162,33 @@ export const PREDEFINED_TEMPLATES: Template[] = [
     icon: '👔',
     htmlTemplate: `
       <div class="dress-code">
-        <h3>👔 Dress Code</h3>
-        <p>{{code}}</p>
+        <div class="dress-content">
+          <h3>👔 Dress Code</h3>
+          <p>{{code}}</p>
+        </div>
       </div>
     `,
     cssPreset: `
       .dress-code {
-        background: #fff3cd;
-        padding: 20px;
-        border-radius: 8px;
-        margin: 20px 0;
-        border-left: 4px solid #ffc107;
+        margin: 30px 0;
       }
-      .dress-code h3 {
-        margin: 0 0 10px 0;
-        color: #856404;
+      .dress-content {
+        background: linear-gradient(135deg, #fff9c4 0%, #fff176 100%);
+        padding: 25px;
+        border-radius: 10px;
+        border-left: 5px solid #fbc02d;
+        box-shadow: 0 4px 15px rgba(251, 192, 45, 0.2);
       }
-      .dress-code p {
+      .dress-content h3 {
+        margin: 0 0 12px 0;
+        color: #f57f17;
+        font-size: 1.3em;
+        font-weight: bold;
+      }
+      .dress-content p {
         margin: 0;
         color: #856404;
+        font-size: 1.05em;
       }
     `,
   },
@@ -151,31 +199,48 @@ export const PREDEFINED_TEMPLATES: Template[] = [
     category: 'footer',
     icon: '✉️',
     htmlTemplate: `
-      <div class="rsvp">
-        <h3>RSVP</h3>
-        <p>Please confirm your attendance by {{deadline}}</p>
-        <p>Contact: <a href="mailto:{{email}}">{{email}}</a></p>
-        <p>Phone: {{phone}}</p>
+      <div class="rsvp-section">
+        <div class="rsvp-content">
+          <h3>RSVP</h3>
+          <p class="rsvp-text">Please confirm your attendance by {{deadline}}</p>
+          <div class="contact-info">
+            <p><strong>Email:</strong> <a href="mailto:{{email}}">{{email}}</a></p>
+            <p><strong>Phone:</strong> {{phone}}</p>
+          </div>
+        </div>
       </div>
     `,
     cssPreset: `
-      .rsvp {
+      .rsvp-section {
+        margin-top: 40px;
+      }
+      .rsvp-content {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         color: white;
-        padding: 30px;
-        border-radius: 8px;
-        margin: 20px 0;
+        padding: 40px;
+        border-radius: 12px;
         text-align: center;
+        box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
       }
-      .rsvp h3 {
-        margin: 0 0 15px 0;
-        font-size: 1.5em;
+      .rsvp-content h3 {
+        margin: 0 0 20px 0;
+        font-size: 1.8em;
+        font-weight: bold;
+        letter-spacing: 2px;
       }
-      .rsvp p {
-        margin: 8px 0;
+      .rsvp-text {
+        margin: 0 0 20px 0;
+        font-size: 1.1em;
       }
-      .rsvp a {
-        color: white;
+      .contact-info {
+        margin-top: 20px;
+      }
+      .contact-info p {
+        margin: 10px 0;
+        font-size: 1em;
+      }
+      .contact-info a {
+        color: #fff;
         text-decoration: underline;
       }
     `,
@@ -193,12 +258,47 @@ export const PREDEFINED_TEMPLATES: Template[] = [
     `,
     cssPreset: `
       .custom-text {
-        padding: 15px 0;
-        line-height: 1.6;
+        padding: 20px 0;
+        line-height: 1.8;
         color: #333;
       }
       .custom-text p {
-        margin: 10px 0;
+        margin: 15px 0;
+        font-size: 1.05em;
+        color: #555;
+      }
+    `,
+  },
+  {
+    id: 'program',
+    name: 'Program / Schedule',
+    description: 'Event schedule or program details',
+    category: 'content',
+    icon: '📋',
+    htmlTemplate: `
+      <div class="program-section">
+        <h3>📋 Program</h3>
+        <div class="program-content">
+          {{content}}
+        </div>
+      </div>
+    `,
+    cssPreset: `
+      .program-section {
+        margin: 30px 0;
+      }
+      .program-section h3 {
+        color: #333;
+        font-size: 1.4em;
+        margin-bottom: 15px;
+        border-bottom: 3px solid #667eea;
+        padding-bottom: 10px;
+      }
+      .program-content {
+        background: #f8f9fa;
+        padding: 20px;
+        border-radius: 8px;
+        line-height: 1.8;
       }
     `,
   },
@@ -214,5 +314,5 @@ export function getTemplatesByCategory(category: string): Template[] {
 
 export function getAllCategories(): string[] {
   const categories = new Set(PREDEFINED_TEMPLATES.map((t) => t.category));
-  return Array.from(categories);
+  return Array.from(categories).sort();
 }
