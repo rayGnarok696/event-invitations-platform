@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  @apply box-border;
+}
+
+body {
+  @apply bg-slate-50 text-slate-900;
+}
+
+.invitation-preview {
+  @apply shadow-lg rounded-lg overflow-hidden;
+}
+
+.section-card {
+  @apply bg-white rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow;
+}
+
+.template-selector {
+  @apply flex flex-wrap gap-4;
+}
+
+.template-card {
+  @apply cursor-pointer p-4 border-2 border-slate-200 rounded-lg hover:border-blue-500 transition-colors;
+}
+
+.template-card.selected {
+  @apply border-blue-500 bg-blue-50;
+}

@@ -1,0 +1,53 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Event {
+  id        String     @id @default(cuid())
+  title     String
+  description String?
+  date      DateTime?
+  location  String?
+  theme     String @default("elegant")
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  
+  sections  Section[]
+}
+
+model Section {
+  id        String     @id @default(cuid())
+  eventId   String
+  templateId String
+  title     String
+  content   String?
+  order     Int @default(0)
+  customData String? // JSON para datos adicionales
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  
+  event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  
+  @@index([eventId])
+}
+
+model Template {
+  id        String @id
+  name      String
+  description String?
+  category  String
+  icon      String?
+  htmlTemplate String
+  cssPreset String?
+  createdAt DateTime @default(now())
+  
+  @@unique([id])
+}
