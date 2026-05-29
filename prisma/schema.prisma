@@ -21,6 +21,8 @@ model Event {
   updatedAt DateTime   @updatedAt
   
   sections  Section[]
+
+  @@index([createdAt])
 }
 
 model Section {
@@ -30,13 +32,14 @@ model Section {
   title     String
   content   String?
   order     Int @default(0)
-  customData String? // JSON para datos adicionales
+  customData String?
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt
   
   event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
   
   @@index([eventId])
+  @@index([templateId])
 }
 
 model Template {
@@ -50,4 +53,5 @@ model Template {
   createdAt DateTime @default(now())
   
   @@unique([id])
+  @@index([category])
 }

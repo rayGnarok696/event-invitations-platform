@@ -7,25 +7,98 @@
 }
 
 body {
-  @apply bg-slate-50 text-slate-900;
+  @apply bg-slate-50 text-slate-900 transition-colors;
 }
 
+/* Invitation Preview Styles */
 .invitation-preview {
-  @apply shadow-lg rounded-lg overflow-hidden;
+  @apply shadow-lg rounded-lg overflow-hidden bg-white;
+  break-inside: avoid;
 }
 
+.invitation-preview h1,
+.invitation-preview h2,
+.invitation-preview h3 {
+  @apply font-serif font-bold;
+}
+
+.invitation-preview p {
+  @apply leading-relaxed;
+}
+
+/* Section Card */
 .section-card {
-  @apply bg-white rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow;
+  @apply bg-white rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow border border-slate-100;
 }
 
+.section-card:hover {
+  @apply border-blue-200;
+}
+
+/* Template Selector */
 .template-selector {
   @apply flex flex-wrap gap-4;
 }
 
 .template-card {
-  @apply cursor-pointer p-4 border-2 border-slate-200 rounded-lg hover:border-blue-500 transition-colors;
+  @apply cursor-pointer p-4 border-2 border-slate-300 rounded-lg hover:border-blue-500 hover:bg-blue-50 transition-all duration-200;
+}
+
+.template-card:active {
+  @apply scale-95;
 }
 
 .template-card.selected {
   @apply border-blue-500 bg-blue-50;
+}
+
+/* Forms */
+input[type="text"],
+input[type="email"],
+input[type="datetime-local"],
+textarea,
+select {
+  @apply transition-all duration-200;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="datetime-local"]:focus,
+textarea:focus,
+select:focus {
+  @apply ring-2 ring-blue-500 ring-offset-2;
+}
+
+/* Buttons */
+button {
+  @apply transition-all duration-200;
+}
+
+button:disabled {
+  @apply opacity-50 cursor-not-allowed;
+}
+
+/* Print Styles */
+@media print {
+  .invitation-preview {
+    @apply shadow-none;
+  }
+
+  body {
+    @apply bg-white;
+  }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    @apply opacity-0;
+  }
+  to {
+    @apply opacity-100;
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.3s ease-in-out;
 }
